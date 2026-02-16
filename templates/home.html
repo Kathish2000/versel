@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="min-h-[80vh] flex items-center justify-center pt-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center hero-content">
+        <div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 overflow-hidden">
+                <span class="block animate-hi">Hi, I'm</span>
+                <span class="text-gradient block animate-name">{{ profile.name|default:"Kathish Sudhakar" }}</span>
+            </h1>
+            <div class="text-xl text-slate-400 mb-8 leading-relaxed overflow-hidden">
+                <span class="block animate-role text-white font-semibold text-2xl mb-2">Full Stack Developer</span>
+                <p class="animate-bio">
+                    {{ profile.bio|default:"A passionate developer crafting modern, scalable, and visually stunning web experiences." }}
+                </p>
+            </div>
+            <div class="flex space-x-4">
+                <a href="{% url 'projects' %}" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105">
+                    View My Work
+                </a>
+                <a href="{% url 'download_resume' %}" class="px-8 py-3 glass hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105 flex items-center">
+                    <i class="fas fa-download mr-2"></i> Resume
+                </a>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="relative w-full h-full object-cover rounded-2xl border-2 border-slate-700">
+                {% else %}
+                <div class="relative w-full h-full bg-slate-800 rounded-2xl border-2 border-slate-700 flex items-center justify-center">
+                    <i class="fas fa-user text-6xl text-slate-600"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

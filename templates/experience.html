@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-32 min-h-[80vh]">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center hero-content">My <span class="text-gradient">Journey</span></h2>
+        <div class="relative border-l-2 border-slate-800 ml-4 md:ml-0 md:max-w-3xl md:mx-auto">
+            {% for exp in experiences %}
+            <div class="mb-12 ml-8 relative">
+                <div class="absolute -left-[41px] top-1 w-5 h-5 bg-blue-600 rounded-full border-4 border-slate-900"></div>
+                <div class="glass p-6 rounded-2xl hover:scale-[1.02] transition-transform">
+                    <span class="text-blue-400 font-mono text-sm">{{ exp.start_date|date:"M Y" }} - {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}</span>
+                    <h3 class="text-xl font-bold mt-1">{{ exp.position }}</h3>
+                    <p class="text-slate-500 mb-4">{{ exp.company }}</p>
+                    <p class="text-slate-400">{{ exp.description }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-slate-500 italic">No experience added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

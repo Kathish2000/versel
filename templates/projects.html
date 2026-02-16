@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-32 min-h-[80vh]">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center hero-content">Featured <span class="text-gradient">Projects</span></h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for project in projects %}
+            <div class="glass group rounded-2xl overflow-hidden hover:scale-105 transition-all">
+                <div class="relative h-48">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover">
+                    {% else %}
+                    <div class="w-full h-full bg-slate-800 flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-4xl text-slate-700"></i>
+                    </div>
+                    {% endif %}
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
+                        {% if project.link %}
+                        <a href="{{ project.link }}" target="_blank" class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        {% endif %}
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank" class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">{{ project.title }}</h3>
+                    <p class="text-slate-400 text-sm line-clamp-3">{{ project.description }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-slate-500 italic col-span-full">No projects listed yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
